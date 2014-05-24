@@ -26,8 +26,8 @@ makeMatrix <- function(x = matrix()) {
     
     ## The "set" sub-function stores the input matrix y to x
     ## if and only if, y is a square matrix
-	## It also validates the input matrix and clears the cache i
-	## if x has been modified.
+    ## It also validates the input matrix and clears the cache i
+    ## if x has been modified.
     set <- function(y) {
         
         if( ncol(y) == nrow(y) && class(y) == "matrix") {
