@@ -2,24 +2,24 @@
 ## Shree Raj Shrestha
 ## 5/16/2014
 ##
-## "makeMatrix" function initializes the inverse and the input matrix.
-## It has sub-functions to set, access and modify the value of the
+## "makeCacheMatrix" function initializes the inverse and vallidates the input matrix.
+## It has sub-functions to get and set the value of the
 ## input matrix x and the cached inverse i from another environment.
 ## 
-## "cacheinverse" function either retrieves or calculates (and sets) the
-## cached inverse, i. This function uses the sub-functions of makeMatrix
-## to set, access and retrieve the values of x and i in the makeMatrix environment.
+## "cacheSolve" function either retrieves stored inverse  cache or calculates (and sets)
+## the inverse cache, i. This function uses the sub-functions of makeCacheMatrix
+## to set, access and retrieve the values of x and i in the makeCacheMatrix environment.
 
 
-## "makeMatrix" function initializes the matrix and the cache.
+## "makeCacheMatrix" function initializes the matrix and the cache.
 ## The "set" sub-function sets the value of x to input if and only if
 ## the input is a square matrix.
 ## The "get" sub-function returns the value of x, the matrix being processed.
 ## The "setinverse" sub-function sets the value of i, the cache, to the 
-## calculated inverse from the cacheinverse environment.
+## calculated inverse from the cacheSolve environment.
 ## The "getinverse" sub-function returns the value of the cache i. 
 
-makeMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix()) {
     
     ## initializing the cache as NULL, the inverse is stored in this cache
     i <- NULL
@@ -46,24 +46,24 @@ makeMatrix <- function(x = matrix()) {
     ## return the value of x, the matrix being processed
     get <- function() x
     
-    ## set the value of the cache i using 'inverse' from cacheinverse environment
+    ## set the value of the cache i using 'inverse' from cacheSolve environment
     setinverse <- function(inverse) i <<- inverse
     
-    ## return the cached inverse i from this (makeMatrix) environment
+    ## return the cached inverse i from this (makeCacheMatrix) environment
     getinverse <- function() i
     
-    ## output the functions in the makeMatrix function as lists
+    ## output the functions in the makeCacheMatrix function as lists
     list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
     
 }
 
 
-## "cacheinverse" retrieves the matrix and inverse 
-## from the makeMatrix environment (which is our cache).
+## "cacheSolve" retrieves the matrix and inverse 
+## from the makeCacheMatrix environment (which is our cache).
 ## If the cache is full, returns the cached value of inverse
 ## If the cache is empty, calculate the inverse for the 
 ## retrieved matrix and sets the cache to the calculated value
-cacheinverse <- function(x, ...) {
+cacheSolve <- function(x, ...) {
     
     ## get the cached inverse of x
     i <- x$getinverse()
